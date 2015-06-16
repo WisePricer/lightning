@@ -122,13 +122,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 $script= <<SCRIPT
 wget wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
-sudo apt-get update
-sudo apt-get install -yf elixir
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
-sudo apt-get install -yf nodejs
+sudo apt-get install -yf nodejs elixir phantomjs erlang-dev
 SCRIPT
 
     config.vm.provision "shell", inline: $script
     config.vm.network "forwarded_port", guest: 4000, host: 4000, protocol: 'tcp', auto_correct: true
-    config.vm.synced_folder ".", "/home/vagrant/lightning"
+    config.vm.synced_folder ".", "/home/vagrant/lightning"    
+    config.vm.provider "virtualbox" do |vb|
+      vb.customize ["modifyvm", :id, "--memory", "1536"]
+    end
+
 end

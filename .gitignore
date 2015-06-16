@@ -25,3 +25,6 @@ erl_crash.dump
 .vagrant
 /priv/static/screenshots/*.png
 
+#Vim's temp files.
+*.swp
+*.swo
