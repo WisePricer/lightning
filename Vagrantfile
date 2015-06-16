@@ -120,7 +120,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   #   chef.validation_client_name = "ORGNAME-validator"
 $script= <<SCRIPT
-wget wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
+wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
 sudo apt-get install -yf nodejs elixir phantomjs erlang-dev
