@@ -1,8 +1,11 @@
 <button class="btn btn-magenta" id="run-scraper">Run Scraper</button>
 <div class="row">
   <div class="col-md-6 text-editor">
-    Script
-    <textarea></textarea>
+    <h3>Script</h3>
+    <textarea placeholder="Write your awsome scraper code here..."></textarea>
   </div>
-  <div class="col-md-6 preview">Preview</div>
+  <div class="col-md-6 preview">
+    <h3>Preview</h3>
+    <div class="screenshot_container"></div>
+  </div>
 </div>
