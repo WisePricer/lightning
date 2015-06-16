@@ -28,3 +28,4 @@ erl_crash.dump
 #Vim's temp files.
 *.swp
 *.swo
+**/.DS_Store
