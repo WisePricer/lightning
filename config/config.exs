@@ -19,7 +19,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :hound, driver: "selenium" #, host: "localhost", port: 8910
+config :hound, driver: "phantomjs", host: "localhost", port: 8910
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
