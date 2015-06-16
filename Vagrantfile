@@ -124,9 +124,11 @@ wget wget http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb
 sudo dpkg -i erlang-solutions_1.0_all.deb
 sudo apt-get update
 sudo apt-get install -yf elixir
+curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
+sudo apt-get install -yf nodejs
 SCRIPT
 
     config.vm.provision "shell", inline: $script
-    config.vm.network "forwarded_port", guest: 80, host: 8080, protocol: 'tcp', auto_correct: true
+    config.vm.network "forwarded_port", guest: 4000, host: 4000, protocol: 'tcp', auto_correct: true
     config.vm.synced_folder ".", "/home/vagrant/lightning"
 end
