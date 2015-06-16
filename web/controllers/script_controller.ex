@@ -23,10 +23,7 @@ defmodule Lightning.ScriptController do
   end
 
   def parse cmd do
-    strings = String.split(cmd)
-    IO.inspect strings
-    # String.split(cmd)
-    strings
+    String.split(cmd)
   end
 
   def execute_command cmd do
@@ -47,9 +44,12 @@ defmodule Lightning.ScriptController do
   end
 
   def execute ["click", selector] do
+    find_element(:css, selector)
+      |> click()
   end
 
   def execute ["enter", text, "in", selector] do
-
+    find_element(:css, selector)
+      |> fill_field(text)
   end
 end
