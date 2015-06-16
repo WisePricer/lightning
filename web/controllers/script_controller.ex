@@ -33,7 +33,7 @@ defmodule Lightning.ScriptController do
 
   def execute_command context, cmd do
     step_id = SecureRandom.urlsafe_base64(8)
-    result = execute cmd
+    result = execute context, cmd
 
     filename = "screenshots/#{step_id}.png"
     screenshot_path = "priv/static/#{filename}"
@@ -55,21 +55,39 @@ defmodule Lightning.ScriptController do
       |> Dict.put(:debug, [step_debug | Dict.get(context, :debug)])
   end
 
-  def execute ["goto", url] do
+  def select selector do
+    execute_script("document.querySelector(\"#{selector}\").style.border = '3px solid red'")
+  end
+
+  def execute context, ["goto", url] do
     navigate_to(url)
   end
 
-  def execute ["click", selector] do
+  def execute context, ["click", selector] do
+    select selector
+
     find_element(:css, selector)
       |> click()
   end
 
-  def execute ["enter", text, "in", selector] do
+  def execute context, ["enter", text, "in", selector] do
+    select selector
+
+    data = context[:input]
+    IO.inspect(context)
+    IO.inspect(data)
+    normalized_text = Regex.replace(
+      ~r/\:(\w+)/,
+      text,
+      fn (_, x) -> IO.inspect(x); data[x] end
+    )
     find_element(:css, selector)
-      |> fill_field(text)
+      |> fill_field(normalized_text)
   end
 
-  def execute ["return", attr, "from", selector] do
+  def execute context, ["return", attr, "from", selector] do
+    select selector
+
     value = find_element(:css, selector)
       |> visible_text()
     [attr, value]
