@@ -19,7 +19,8 @@ defmodule Lightning.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Lightning do
-  #   pipe_through :api
-  # end
+  scope "/api", Lightning do
+    pipe_through :api
+    post "/scripts", ScriptController, :run
+  end
 end

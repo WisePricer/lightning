@@ -18,7 +18,7 @@ defmodule Lightning.Mixfile do
   def application do
     [mod: {Lightning, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :hound]]
   end
 
   # Specifies which paths to compile per environment
@@ -34,6 +34,7 @@ defmodule Lightning.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:hound, "~> 0.7.0" },
      {:cowboy, "~> 1.0"}]
   end
 end
