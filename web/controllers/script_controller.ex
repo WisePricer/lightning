@@ -30,12 +30,14 @@ defmodule Lightning.ScriptController do
     step_id = SecureRandom.urlsafe_base64(8)
     execute cmd
 
-    screenshot_path = "priv/static/#{step_id}.png"
+    filename = "screenshots/#{step_id}.png"
+    screenshot_path = "priv/static/#{filename}"
+    screenshot_url = "/#{filename}"
     take_screenshot(screenshot_path)
     %{
       step_id: step_id,
       title: page_title(),
-      screenshot: screenshot_path
+      screenshot_url: screenshot_url
     }
   end
 
