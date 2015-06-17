@@ -24,6 +24,6 @@
 
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script>require("web/static/js/app")</script>
-    <script>require("web/static/js/scraper")</script>
+    <script>require("web/static/js/lighning")</script>
   </body>
 </html>

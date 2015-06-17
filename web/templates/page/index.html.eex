@@ -2,7 +2,16 @@
 <div class="row">
   <div class="col-md-6 text-editor">
     <h3>Script</h3>
-    <textarea placeholder="Write your awsome scraper code here..."></textarea>
+
+    <ul class="script-list">
+      <li><input type="text" placeholder="Goto http://amazon.com"></li>
+      <li class="add-more"><input type="text" disabled=disabled placeholder="Click to add more..."></li>
+    </ul>
+
+    <h3>Variables</h3>
+    <ul class="variables-list"></ul>
+
+
   </div>
   <div class="col-md-6 preview">
     <h3>Preview</h3>

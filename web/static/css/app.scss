@@ -6,15 +6,10 @@ body {
   color: white !important;
   padding: 0 10px;
 }
-h3 {
-  text-shadow: 1px 2px #f06;
-}
 .row {
   padding: 20px;
 }
-
 .alert:empty { display: none; }
-
 .logo {
   font-size: 38px;
   color: $main_color;
@@ -29,17 +24,44 @@ h3 {
 }
 .text-editor {
   height: 500px;
-  textarea {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: transparent;
+  ul {
+    padding: 0;
+    list-style: none;
+    li {
+      margin-bottom: 15px;
+      &::before {
+        width: 10px;
+        display: inline-block;
+        color: $main_color;
+        content: ' ';
+        cursor: pointer;
+        margin-right: 10px;
+      }
+      &:not(.add-more):hover {
+        &::before {
+          content: 'x';
+        }
+      }
+      input {
+        background-color: transparent;
+        border: 0;
+        border-bottom: 1px solid;
+        width: 90%;
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
   }
-  li {
-    cursor: pointer;
+  .variables-list {
+    li {
+      input {
+        width: 300px;
+        border-color: $main_color;
+      }
+    }
   }
 }
-
 .preview {
   min-height: 500px;
   border-left: 1px solid $main_color;
