@@ -20,7 +20,7 @@ newLi = (attr) ->
 changeToSpan = (input) ->
   span = $(document.createElement('span'))
   val = input.val()
-  span.addClass('task2').append(val)
+  span.addClass('task').append(val)
   for w in val.split(' ')
     addVariable(w) if w[0] == ':'
 
@@ -52,6 +52,12 @@ $(document).ready(() ->
     changeToInput($(@))
   )
 
+  $('.script-list').on('click','.screenshot-icon',() ->
+    img = $(document.createElement('img'))
+    img.attr({src: $(@).data('screenshot')})
+    $('.screenshot_container').html(img)
+  )
+
   $('#run-scraper').on('click',() ->
 
     tasks = (t.innerText for t in $('.script-list li') when t.innerText)
@@ -66,7 +72,11 @@ $(document).ready(() ->
       script: tasks
 
     $.post('/api/scripts',data,(response) ->
-      console.log response
+      for t,i in $('.script-list span.task')
+        screenshot_url = response['debug'][i]['screenshot_url']
+        icon = $(document.createElement('span'))
+        icon.addClass('screenshot-icon').attr('data-screenshot',screenshot_url)
+        $(t).before(icon)
     )
   )
 )

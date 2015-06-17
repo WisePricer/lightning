@@ -29,13 +29,13 @@
   };
 
   changeToSpan = function(input) {
-    var i, len, ref, span, val, w;
+    var j, len, ref, span, val, w;
     span = $(document.createElement('span'));
     val = input.val();
-    span.addClass('task2').append(val);
+    span.addClass('task').append(val);
     ref = val.split(' ');
-    for (i = 0, len = ref.length; i < len; i++) {
-      w = ref[i];
+    for (j = 0, len = ref.length; j < len; j++) {
+      w = ref[j];
       if (w[0] === ':') {
         addVariable(w);
       }
@@ -77,14 +77,22 @@
     $('.script-list').on('click', 'span.task', function() {
       return changeToInput($(this));
     });
+    $('.script-list').on('click', '.screenshot-icon', function() {
+      var img;
+      img = $(document.createElement('img'));
+      img.attr({
+        src: $(this).data('screenshot')
+      });
+      return $('.screenshot_container').html(img);
+    });
     return $('#run-scraper').on('click', function() {
-      var data, e, i, len, ref, t, tasks, v, variables;
+      var data, e, j, len, ref, t, tasks, v, variables;
       tasks = (function() {
-        var i, len, ref, results;
+        var j, len, ref, results;
         ref = $('.script-list li');
         results = [];
-        for (i = 0, len = ref.length; i < len; i++) {
-          t = ref[i];
+        for (j = 0, len = ref.length; j < len; j++) {
+          t = ref[j];
           if (t.innerText) {
             results.push(t.innerText);
           }
@@ -93,8 +101,8 @@
       })();
       variables = {};
       ref = $('.variables-list li input');
-      for (i = 0, len = ref.length; i < len; i++) {
-        v = ref[i];
+      for (j = 0, len = ref.length; j < len; j++) {
+        v = ref[j];
         e = $(v);
         if (e.val()) {
           variables[e.data('name')] = e.val();
@@ -105,7 +113,17 @@
         script: tasks
       };
       return $.post('/api/scripts', data, function(response) {
-        return console.log(response);
+        var i, icon, k, len1, ref1, results, screenshot_url;
+        ref1 = $('.script-list span.task');
+        results = [];
+        for (i = k = 0, len1 = ref1.length; k < len1; i = ++k) {
+          t = ref1[i];
+          screenshot_url = response['debug'][i]['screenshot_url'];
+          icon = $(document.createElement('span'));
+          icon.addClass('screenshot-icon').attr('data-screenshot', screenshot_url);
+          results.push($(t).before(icon));
+        }
+        return results;
       });
     });
   });

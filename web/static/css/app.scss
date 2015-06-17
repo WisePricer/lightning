@@ -51,6 +51,14 @@ body {
           outline: 0;
         }
       }
+      .screenshot-icon {
+        display: inline-block;
+        width: 30px;
+        height: 15px;
+        background: url('http://s14.postimg.org/4timsj63h/screenshot_icon.png') no-repeat center center;
+        background-size: contain;
+        cursor: pointer;
+      }
     }
   }
   .variables-list {
